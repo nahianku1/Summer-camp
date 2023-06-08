@@ -9,6 +9,7 @@ import { FaLock, FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
 import Header from "../Header/Header";
+import axios from "axios";
 let GithubProvider = new GithubAuthProvider();
 let GoogleProvider = new GoogleAuthProvider();
 function Signin() {
@@ -42,14 +43,32 @@ function Signin() {
       });
   };
 
-  
+  // let handleGithubSignIn = (e) => {
+  //   e.preventDefault();
+  //   signInWithPopup(auth, GithubProvider)
+  //     .then((result) => {
+  //       const user = result.user;
+  //       console.log(user);
+  //       navigate("/");
+  //     })
+  //     .catch((error) => {
+  //       modifyError(error);
+  //     });
+  // };
+
   let handleGoogleSignIn = (e) => {
     e.preventDefault();
     signInWithPopup(auth, GoogleProvider)
       .then((result) => {
-        const user = result.user;
-        console.log(user);
-        navigate("/");
+        const { displayName, email } = result.user;
+        axios
+          .post(`http://localhost:5000/users`, {
+            username: displayName,
+            email: email,
+          })
+          .then(() => {
+            navigate("/");
+          });
       })
       .catch((error) => {
         modifyError(error);
@@ -141,7 +160,6 @@ function Signin() {
             </div>
           </form>
           <div className="flex flex-col gap-4 px-[70px] mt-[20px]">
-
             <button
               onClick={handleGoogleSignIn}
               className="bg-blue-400 rounded-md text-white flex items-center justify-center gap-2 py-2 px-2 md:px-4"

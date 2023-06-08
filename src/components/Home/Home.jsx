@@ -2,7 +2,7 @@ import React from "react";
 import HomeBanner from "../HomeBanner/HomeBanner";
 import useSWR from "swr";
 import Testimonial from "../Testimonial/Testimonial";
-import RecipeDetails from "../RecipeDetails/RecipeDetails";
+// import RecipeDetails from "../RecipeDetails/RecipeDetails";
 import { RotatingLines } from "react-loader-spinner";
 
 let chefReccipes = async () => {
@@ -30,7 +30,6 @@ function Home() {
   return (
     <>
       <HomeBanner />
-      <RecipeDetails chefdetails={chefdetails} />
     </>
   );
 }

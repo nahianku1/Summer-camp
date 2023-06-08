@@ -11,8 +11,8 @@ import {
   IoSunnySharp,
   IoCodeOutline,
 } from "react-icons/io5";
-import Sidebar from "../Sidebar/Sidebar";
-import LoveSign from "../LoveSign/LoveSign";
+// import Sidebar from "../Sidebar/Sidebar";
+// import LoveSign from "../LoveSign/LoveSign";
 import { FavContext } from "../../App";
 
 function Header() {
