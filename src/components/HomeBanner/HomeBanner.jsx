@@ -28,18 +28,44 @@ function HomeBanner() {
             pauseOnMouseEnter: true,
           }}
           // navigation={true}
-          modules={[Pagination, Navigation,Autoplay]}
+          modules={[Pagination, Navigation, Autoplay]}
           className="mySwiper"
         >
-          <SwiperSlide>Slide 1</SwiperSlide>
-          <SwiperSlide>Slide 2</SwiperSlide>
-          <SwiperSlide>Slide 3</SwiperSlide>
-          <SwiperSlide>Slide 4</SwiperSlide>
-          <SwiperSlide>Slide 5</SwiperSlide>
-          <SwiperSlide>Slide 6</SwiperSlide>
-          <SwiperSlide>Slide 7</SwiperSlide>
-          <SwiperSlide>Slide 8</SwiperSlide>
-          <SwiperSlide>Slide 9</SwiperSlide>
+          <SwiperSlide>
+            <img src="/images/slide1.jpg" alt="man" />
+            <p className="absolute bg-black p-[20px] bottom-[30px]">
+              Expand Your Horizons: Unlock New Cultures and Connect with People
+              through the Power of Language Learning.
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/images/slide2.jpg" alt="man" />
+            <p className="absolute bg-black p-[20px] bottom-[30px]">
+              Discover the Beauty of Language: Immerse Yourself in Words that
+              Open Doors to Endless Opportunities.
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/images/slide3.jpg" alt="man" />
+            <p className="absolute bg-black p-[20px] bottom-[30px]">
+              Master the Art of Multilingualism: Unleash Your Potential and
+              Embrace a World of Languages.
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/images/slide4.jpg" alt="man" />
+            <p className="absolute bg-black p-[20px] bottom-[30px]">
+              Journey into Language: Explore the Depths of Communication and
+              Embrace the Global Tapestry of Words.
+            </p>
+          </SwiperSlide>
+          <SwiperSlide>
+            <img src="/images/slide5.jpg" alt="man" />
+            <p className="absolute bg-black p-[20px] bottom-[30px]">
+              Language: The Key to a Global Adventure. Begin Your Quest for
+              Fluency and Unlock Boundless Experiences.
+            </p>
+          </SwiperSlide>
         </Swiper>
       </div>
     </div>
