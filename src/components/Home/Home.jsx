@@ -28,9 +28,9 @@ function Home() {
     );
 
   return (
-    <>
+    <div className="min-h-screen">
       <HomeBanner />
-    </>
+    </div>
   );
 }
 

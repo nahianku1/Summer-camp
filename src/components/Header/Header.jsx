@@ -11,7 +11,7 @@ import {
   IoSunnySharp,
   IoCodeOutline,
 } from "react-icons/io5";
-// import Sidebar from "../Sidebar/Sidebar";
+import Sidebar from "../Sidebar/Sidebar";
 // import LoveSign from "../LoveSign/LoveSign";
 import { FavContext } from "../../App";
 
@@ -51,11 +51,23 @@ function Header() {
       <div>
         <title>{auth?.currentUser?.displayName}</title>
       </div>
-      <nav className="p-[8px] bg-[#f788c7] dark:bg-slate-900 text-brown dark:text-white flex justify-between items-center">
+      <nav className="px-[8px] md:px-[100px] py-[10px] dark:bg-slate-900 text-brown dark:text-white flex justify-between items-center">
         <div className="flex gap-3 ">
-          <h1 className="font-pacifico cursor-pointer">
-            <Link to="/">Fantasy Recipes</Link>
-          </h1>
+          <div className="flex items-center justify-center gap-[7px]">
+            <img src="/images/logo.png" className="block w-[32px]" alt="" />
+            <h1 className="font-pacifico cursor-pointer">
+              <Link to="/">Lingua Masters</Link>
+            </h1>
+          </div>
+
+          <button
+            onClick={() => setOpen(true)}
+            className="inline-block text-black md:hidden"
+          >
+            <FaBars className="dark:text-white" />
+          </button>
+        </div>
+        <div className="flex items-center  gap-4">
           <div className="hidden gap-3  md:flex">
             <NavLink to="/">Home</NavLink>
             <NavLink to="/instructors">Instructors</NavLink>
@@ -66,14 +78,6 @@ function Header() {
               <NavLink to="/dashboard">Dashboard</NavLink>
             </div>
           </div>
-          <button
-            onClick={() => setOpen(true)}
-            className="inline-block text-black md:hidden"
-          >
-            <FaBars className="dark:text-white" />
-          </button>
-        </div>
-        <div className="flex items-center  gap-4">
           {theme === "light" ? (
             <IoMoon
               className="cursor-pointer text-2xl font-bold"
