@@ -58,12 +58,12 @@ function Header() {
           </h1>
           <div className="hidden gap-3  md:flex">
             <NavLink to="/">Home</NavLink>
-            <NavLink to="/about">About</NavLink>
-            <NavLink to="/blog">Blog</NavLink>
+            <NavLink to="/instructors">Instructors</NavLink>
+            <NavLink to="/classes">Classes</NavLink>
             <div className=" relative">
               {favstate > 0 ? <LoveSign count={favstate} /> : ""}
 
-              <NavLink to="/favorite">Favorites</NavLink>
+              <NavLink to="/dashboard">Dashboard</NavLink>
             </div>
           </div>
           <button

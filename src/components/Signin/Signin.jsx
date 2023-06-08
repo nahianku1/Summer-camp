@@ -84,7 +84,7 @@ function Signin() {
             onSubmit={handleSubmit(onSubmit)}
             className="flex items-center justify-center flex-col gap-4"
           >
-            <div className=" mb-5 text-6xl text-green-400">
+            <div className=" mb-5 text-6xl text-[#f788c7]">
               <FaLock />
             </div>
             <div>
@@ -94,7 +94,7 @@ function Signin() {
               <input
                 type="text"
                 autoComplete="true"
-                className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
+                className="focus:shadow-lg outline-none border border-solid border-[#f788c7] p-1 rounded-md indent-2"
                 placeholder="Email"
                 {...register("email")}
                 required
@@ -108,7 +108,7 @@ function Signin() {
                 <input
                   type={hidden ? `password` : `text`}
                   autoComplete="true"
-                  className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
+                  className="focus:shadow-lg outline-none border border-solid border-[#f788c7] p-1 rounded-md indent-2"
                   placeholder="Password"
                   {...register("password")}
                   required
@@ -138,7 +138,7 @@ function Signin() {
             <div>
               <button
                 type="submit"
-                className="bg-green-400 px-4 py-2 rounded-lg text-white font-bold"
+                className="bg-[#f788c7] px-4 py-2 rounded-lg text-white font-bold"
               >
                 Sing In
               </button>
@@ -159,7 +159,7 @@ function Signin() {
           <div className="flex flex-col gap-4 px-[70px] mt-[20px]">
             <button
               onClick={handleGoogleSignIn}
-              className="bg-blue-400 rounded-md text-white flex items-center justify-center gap-2 py-2 px-2 md:px-4"
+              className="bg-[#f788c7] rounded-md text-white flex items-center justify-center gap-2 py-2 px-2 md:px-4"
             >
               <FaGoogle className="text-white text-2xl" />
               Login with Google

@@ -83,14 +83,14 @@ function Register() {
       });
   };
   return (
-    <div className="flex justify-center items-center h-[100vh] bg-green-200">
-      <div className="bg-white w-[320px] md:w-[400px] py-[30px] rounded-md ">
+    <div className="flex justify-center items-center  py-[30px]">
+      <div className="bg-white border border-solid border-black w-[320px] md:w-[400px] py-[30px] rounded-md ">
         <form
           action=""
           onSubmit={handleSubmit(onSubmit)}
           className="flex items-center justify-center flex-col gap-4"
         >
-          <div className=" mb-5 text-[100px] font-bold text-green-400">
+          <div className=" mb-5 text-[100px] font-bold text-[#f788c7]">
             <IoPersonSharp />
           </div>
           <div>
@@ -99,7 +99,7 @@ function Register() {
             </label>
             <input
               type="text"
-              className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
+              className="focus:shadow-lg outline-none border border-solid border-[#f788c7] p-1 rounded-md indent-2"
               placeholder="Name"
               {...register("username")}
             />
@@ -110,7 +110,7 @@ function Register() {
             </label>
             <input
               type="text"
-              className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
+              className="focus:shadow-lg outline-none border border-solid border-[#f788c7] p-1 rounded-md indent-2"
               placeholder="Email"
               {...register("email")}
               required
@@ -123,7 +123,7 @@ function Register() {
             <div className="relative">
               <input
                 type={hidden ? `password` : `text`}
-                className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
+                className="focus:shadow-lg outline-none border border-solid border-[#f788c7] p-1 rounded-md indent-2"
                 placeholder="Password"
                 {...register("password")}
                 required
@@ -148,7 +148,7 @@ function Register() {
             <div className="relative">
               <input
                 type="password"
-                className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
+                className="focus:shadow-lg outline-none border border-solid border-[#f788c7] p-1 rounded-md indent-2"
                 placeholder="Password"
                 {...register("cpassword")}
                 required
@@ -161,7 +161,7 @@ function Register() {
             </label>
             <input
               type="file"
-              className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
+              className="focus:shadow-lg outline-none border border-solid border-[#f788c7] p-1 rounded-md indent-2"
               placeholder="Photo URL"
               {...register("photo")}
             />
@@ -178,7 +178,7 @@ function Register() {
           <div>
             <button
               type="submit"
-              className="bg-green-400 px-4 py-2 rounded-lg text-white font-bold"
+              className="bg-[#f788c7] px-4 py-2 rounded-lg text-white font-bold"
             >
               Sing Up
             </button>
