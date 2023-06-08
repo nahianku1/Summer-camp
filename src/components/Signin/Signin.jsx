@@ -10,15 +10,17 @@ import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
 import Header from "../Header/Header";
 import axios from "axios";
+import { useForm } from "react-hook-form";
 let GithubProvider = new GithubAuthProvider();
 let GoogleProvider = new GoogleAuthProvider();
 function Signin() {
   let [hidden, setHidden] = useState(true);
   let [error, setError] = useState("");
+  let { register, handleSubmit } = useForm();
 
   let { auth } = useContext(AuthContext);
-  let emailRef = useRef("");
-  let passwordRef = useRef("");
+  // let emailRef = useRef("");
+  // let passwordRef = useRef("");
   let navigate = useNavigate();
 
   let modifyError = (error) => {
@@ -31,10 +33,9 @@ function Signin() {
     setError(modifiedMessage);
   };
 
-  let handleSubmit = (e) => {
-    e.preventDefault();
-
-    signInWithEmailAndPassword(auth, emailRef.current, passwordRef.current)
+  let onSubmit = (data) => {
+    
+    signInWithEmailAndPassword(auth, data.email, data.password)
       .then((result) => {
         navigate("/");
       })
@@ -80,7 +81,7 @@ function Signin() {
         <div className="bg-white w-[320px] md:w-[400px] py-[30px] border border-solid border-black rounded-md ">
           <form
             action=""
-            onSubmit={handleSubmit}
+            onSubmit={handleSubmit(onSubmit)}
             className="flex items-center justify-center flex-col gap-4"
           >
             <div className=" mb-5 text-6xl text-green-400">
@@ -95,9 +96,7 @@ function Signin() {
                 autoComplete="true"
                 className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
                 placeholder="Email"
-                onChange={(e) => {
-                  emailRef.current = e.target.value;
-                }}
+                {...register("email")}
                 required
               />
             </div>
@@ -111,9 +110,7 @@ function Signin() {
                   autoComplete="true"
                   className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
                   placeholder="Password"
-                  onChange={(e) => {
-                    passwordRef.current = e.target.value;
-                  }}
+                  {...register("password")}
                   required
                 />
                 {hidden ? (
