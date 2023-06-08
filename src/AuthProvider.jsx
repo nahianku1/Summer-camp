@@ -1,6 +1,7 @@
 import React, { createContext, useEffect, useState } from "react";
 import app from "../firebase.config";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import axios from "axios";
 
 let auth = getAuth(app);
 export let AuthContext = createContext(null);
@@ -11,6 +12,17 @@ function AuthProvider({ children }) {
     onAuthStateChanged(auth, (user) => {
       console.log(user);
       setUser(user);
+      if (user) {
+        axios
+          .post(`http://localhost:5000/jwt`, {
+            email: user.email,
+          })
+          .then((response) => {
+            localStorage.setItem("token", response.data);
+          });
+      } else {
+        localStorage.removeItem("token");
+      }
       setLoading(false);
     });
   }, []);

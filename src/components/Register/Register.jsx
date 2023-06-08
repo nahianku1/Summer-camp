@@ -30,6 +30,21 @@ function Register() {
 
   let onSubmit = (data) => {
     setError("");
+    let formData = new FormData();
+    formData.append("image", data.photo[0]);
+    let url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgdata) => {
+        console.log(imgdata.data.display_url);
+        photoRef.current = imgdata.data.display_url;
+      });
     console.log(data);
     if (data.password !== data.cpassword) {
       setError(`Password didn't matched`);
@@ -132,7 +147,7 @@ function Register() {
             </label>
             <div className="relative">
               <input
-                type='password'
+                type="password"
                 className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
                 placeholder="Password"
                 {...register("cpassword")}
@@ -145,12 +160,10 @@ function Register() {
               Photo URL:
             </label>
             <input
-              type="text"
+              type="file"
               className="focus:shadow-lg outline-none border border-solid border-green-400 p-1 rounded-md indent-2"
               placeholder="Photo URL"
-              onChange={(e) => {
-                photoRef.current = e.target.value;
-              }}
+              {...register("photo")}
             />
           </div>
           {error && !error === "Weak Password" ? (
