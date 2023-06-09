@@ -3,6 +3,7 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { AuthContext } from "../../AuthProvider";
 import axios from "axios";
+import Swal from "sweetalert2";
 
 const AddClass = () => {
   const { register, handleSubmit, reset } = useForm();
@@ -42,7 +43,15 @@ const AddClass = () => {
             photo: imgdata.data.display_url,
           })
 
-          .then((data) => console.log(data));
+          .then((data) => {
+            if(data.statusText=='OK'){
+                Swal.fire({
+                    icon: "success",
+                    title: "Yahoo...",
+                    text: 'Class Created!',
+                })
+            }
+          });
       });
 
     // reset();

@@ -18,10 +18,10 @@ import NotFound from "./components/NotFound/NotFound.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import AddClass from "./components/AddClass/AddClass.jsx";
 import MyClasses from "./components/MyClasses/MyClasses.jsx";
-import {
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ManageUsers from "./components/ManageUsers/ManageUsers.jsx";
+import ManageClasses from "./components/ManageClasses/ManageClasses.jsx";
+import DefineUser from "./components/DefineUser/DefineUser.jsx";
 let router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -39,9 +39,11 @@ let router = createBrowserRouter(
           </Protectedroute>
         }
       >
-      <Route index element={<AddClass />} />
-      <Route path="addclass" element={<AddClass />} />
-      <Route path="myclasses" element={<MyClasses/>} />
+        <Route index element={<DefineUser />} />
+        <Route path="addclass" element={<AddClass />} />
+        <Route path="myclasses" element={<MyClasses />} />
+        <Route path="manageclasses" element={<ManageClasses />} />
+        <Route path="manageusers" element={<ManageUsers />} />
       </Route>
       <Route path="*" element={<NotFound />} />
 
@@ -49,13 +51,13 @@ let router = createBrowserRouter(
     </>
   )
 );
-const queryClient = new QueryClient()
+const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <QueryClientProvider client={queryClient}>
-    <RouterProvider router={router}>
-      <App />
-    </RouterProvider>
+      <RouterProvider router={router}>
+        <App />
+      </RouterProvider>
     </QueryClientProvider>
   </AuthProvider>
 );

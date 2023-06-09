@@ -16,21 +16,35 @@ function DashboardSidebar() {
       </div>
       <div className="mt-[30px] px-[20px]">
         <ul>
-          <li className=" hover:bg-black text-white py-[10px] px-[8px] flex gap-2 items-center ">
+          <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
             <NavLink to="/" className="flex items-center gap-2">
               <FaAccusoft /> <span>Home</span>
             </NavLink>
           </li>
           {role === "instructor" && (
             <div>
-              <li className=" hover:bg-black text-white py-[10px] px-[8px] flex gap-2 items-center ">
+              <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="addclass" className="flex items-center gap-2">
                   <FaAccusoft /> <span>Add Class</span>
                 </NavLink>
               </li>
-              <li className=" hover:bg-black text-white py-[10px] px-[8px] flex gap-2 items-center ">
+              <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="myclasses" className="flex items-center gap-2">
                   <FaAccusoft /> <span>My Classes</span>
+                </NavLink>
+              </li>
+            </div>
+          )}
+          {role === "admin" && (
+            <div>
+              <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
+                <NavLink to="manageclasses" className="flex items-center gap-2">
+                  <FaAccusoft /> <span>Manage Classes</span>
+                </NavLink>
+              </li>
+              <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
+                <NavLink to="manageusers" className="flex items-center gap-2">
+                  <FaAccusoft /> <span>Manage Users</span>
                 </NavLink>
               </li>
             </div>
