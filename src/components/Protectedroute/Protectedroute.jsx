@@ -1,10 +1,12 @@
 import { useContext } from "react";
-import { Navigate } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
 import { RotatingLines } from "react-loader-spinner";
 
 function Protectedroute({ children }) {
   let { user, loading } = useContext(AuthContext);
+  let location=useLocation()
+  console.log(location);
   if (loading)
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-45px)]">
@@ -18,7 +20,7 @@ function Protectedroute({ children }) {
       </div>
     );
   if (user) return children;
-  return <Navigate to="/signin" replace></Navigate>;
+  return <Navigate to="/signin" replace state={location.pathname}></Navigate>;
 }
 
 export default Protectedroute;

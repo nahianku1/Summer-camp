@@ -15,6 +15,7 @@ import Protectedroute from "./components/Protectedroute/Protectedroute.jsx";
 import AuthProvider from "./AuthProvider.jsx";
 
 import NotFound from "./components/NotFound/NotFound.jsx";
+import Dashboard from "./components/Dashboard/Dashboard.jsx";
 
 let router = createBrowserRouter(
   createRoutesFromElements(
@@ -25,6 +26,14 @@ let router = createBrowserRouter(
         <Route path="/register" element={<Register />} />
         <Route path="/signin" element={<Signin />} />
       </Route>
+      <Route
+        path="dashboard"
+        element={
+          <Protectedroute>
+            <Dashboard />
+          </Protectedroute>
+        }
+      />
       <Route path="*" element={<NotFound />} />
 
       <Route path="/reset" element={<Reset />} />

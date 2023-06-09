@@ -6,7 +6,7 @@ import {
 } from "firebase/auth";
 import { useContext, useRef, useState } from "react";
 import { FaLock, FaEye, FaEyeSlash, FaGithub, FaGoogle } from "react-icons/fa";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../AuthProvider";
 import Header from "../Header/Header";
 import axios from "axios";
@@ -17,6 +17,8 @@ function Signin() {
   let [hidden, setHidden] = useState(true);
   let [error, setError] = useState("");
   let { register, handleSubmit } = useForm();
+  let location=useLocation()
+  console.log(location);
 
   let { auth } = useContext(AuthContext);
   // let emailRef = useRef("");
@@ -37,7 +39,7 @@ function Signin() {
     
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((result) => {
-        navigate("/");
+        navigate(location.state);
       })
       .catch((error) => {
         modifyError(error);
@@ -68,7 +70,7 @@ function Signin() {
             email: email,
           })
           .then(() => {
-            navigate("/");
+            navigate(location.state);
           });
       })
       .catch((error) => {
