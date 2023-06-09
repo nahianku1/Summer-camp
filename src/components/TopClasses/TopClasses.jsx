@@ -4,7 +4,7 @@ function TopClasses() {
   return (
     <div className="md:px-[110px] my-[60px]">
       <p className=" dark:text-white font-pacifico text-[30px] text-center font-extrabold">
-        Top Classes
+        Popular Classes
       </p>
       <div className="flex flex-wrap items-center gap-7  justify-center">
         <div className="w-[270px] h-[270px] my-[40px] rounded-full border-[5px] border-solid border-red-400">

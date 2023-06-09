@@ -16,19 +16,16 @@ import AuthProvider from "./AuthProvider.jsx";
 
 import NotFound from "./components/NotFound/NotFound.jsx";
 
-
 let router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
-        
-        
-        <Route path="*" element={<NotFound />} />
-        
+
         <Route path="/register" element={<Register />} />
         <Route path="/signin" element={<Signin />} />
       </Route>
+      <Route path="*" element={<NotFound />} />
 
       <Route path="/reset" element={<Reset />} />
     </>
