@@ -1,33 +1,33 @@
 import React from "react";
+import { FaTelegramPlane } from "react-icons/fa";
+// import Lottie from "lottie-react";
+// import socialmedia from "../../../public/social-media.json";
 
 function Footer() {
   return (
     <div>
-      <footer className="bg-lime-500  dark:bg-slate-900 text-black dark:text-white py-8 px-4">
+      <footer className="bg-red-400 dark:bg-slate-900 text-black dark:text-white py-8 px-4">
         <div className="container mx-auto flex  flex-wrap justify-between">
           <div className="w-full lg:w-1/4 mb-8   lg:mb-0 ">
             <h2 className="text-lg font-bold mb-4">About Us</h2>
             <p className="text-sm">
-              At Fantasy Recipe, we're passionate about food and cooking. We
-              believe that great meals bring people together, and that anyone
-              can learn to cook delicious and healthy dishes with the right
-              ingredients and techniques. 
+            At Lingua master, we believe that language is more than just a means of communication; it is a window into cultures, a bridge connecting people, and a key to unlocking countless opportunities. Our mission is to empower learners to confidently navigate diverse linguistic landscapes and foster meaningful connections across borders.
             </p>
           </div>
-          <div className="w-full lg:flex lg:flex-col lg:items-center lg:w-1/4 mb-8 lg:mb-0 ">
-            <h2 className="text-lg font-bold mb-4">Latest Recipes</h2>
+          <div className="w-full lg:flex lg:flex-col  lg:items-center lg:w-1/4 mb-8 lg:mb-0 ">
+            <h2 className="text-lg font-bold mb-4">Our Services</h2>
             <ul className="text-sm">
               <li>
-                <a href="#">Pasta with Tomato Sauce</a>
+                <a href="#">Online Classes</a>
               </li>
               <li>
-                <a href="#">Grilled Chicken Salad</a>
+                <a href="#">Interactive Learning</a>
               </li>
               <li>
-                <a href="#">Beef Stroganoff</a>
+                <a href="#">Regular assessments</a>
               </li>
               <li>
-                <a href="#">Fish Tacos</a>
+                <a href="#">Dialogue with Instructors</a>
               </li>
             </ul>
           </div>
@@ -48,23 +48,14 @@ function Footer() {
               </li>
             </ul>
           </div>
-          <div className="w-full lg:w-1/4">
-            <h2 className="text-lg text-center font-bold mb-4">
-              Subscribe to Our Newsletter
-            </h2>
-            <form className="flex items-center">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="py-2 px-4 rounded-l-full w-full md:w-3/4 lg:w-full text-gray-900"
-              />
-              <button
-                type="submit"
-                className="bg-red-600 hover:bg-red-700 py-2 px-4 rounded-r-full text-white"
-              >
-                Subscribe
-              </button>
-            </form>
+          <div className="w-full relative lg:w-1/4">
+            <address>
+              <p>Phone: +088 01779-137132</p>
+              <p>Email: himelku1@gmail.com</p>
+              <p>City: Khulna</p>
+              <p> State: Daulatpur</p>
+              <p> Zip Code: 1202</p>
+            </address>
           </div>
         </div>
         <div className="container mx-auto mt-8 border-t border-gray-700 pt-4 flex flex-col md:flex-row justify-between items-center">
@@ -73,8 +64,16 @@ function Footer() {
             <li className="mr-4">
               <a href="#">Privacy Policy</a>
             </li>
-            <li>
+            <li className="mr-4">
               <a href="#">Terms of Service</a>
+            </li>
+            <li className="flex gap-[4px] items-center justify-center">
+              <img
+                src="/images/logo.png"
+                alt=""
+                className="block w-[30px] h-[30px]"
+              />
+              <p>Lingua Master</p>
             </li>
           </ul>
         </div>

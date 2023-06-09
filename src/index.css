@@ -5,14 +5,14 @@
 @tailwind utilities;
 
 .active {
-  background-color: rgb(82, 119, 12);
+  /* background-color: rgb(236, 9, 9);
   display: inline-block;
   height: 100%;
   padding-inline: 10px;
-  color: #fff;
+  color: #fff; */
+  @apply bg-red-400 inline-block h-full px-[10px] text-white;
 }
 
 .link {
-  @apply h-auto inline-block ;
+  @apply h-auto inline-block;
 }
-
