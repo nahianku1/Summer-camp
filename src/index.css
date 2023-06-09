@@ -10,7 +10,7 @@
   height: 100%;
   padding-inline: 10px;
   color: #fff; */
-  @apply bg-red-400 inline-block h-full px-[10px] text-white;
+  @apply bg-black w-full flex h-full px-[10px] text-white;
 }
 
 .link {

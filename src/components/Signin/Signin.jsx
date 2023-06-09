@@ -46,18 +46,7 @@ function Signin() {
       });
   };
 
-  // let handleGithubSignIn = (e) => {
-  //   e.preventDefault();
-  //   signInWithPopup(auth, GithubProvider)
-  //     .then((result) => {
-  //       const user = result.user;
-  //       console.log(user);
-  //       navigate("/");
-  //     })
-  //     .catch((error) => {
-  //       modifyError(error);
-  //     });
-  // };
+
 
   let handleGoogleSignIn = (e) => {
     e.preventDefault();

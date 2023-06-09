@@ -20,13 +20,11 @@ function App() {
 
   return (
     <>
-      <FavContext.Provider
-        value={{ favstate, setFavstate, updated, setUpdated }}
-      >
+    
         <Header />
         <Outlet />
         <Footer />
-      </FavContext.Provider>
+        
     </>
   );
 }

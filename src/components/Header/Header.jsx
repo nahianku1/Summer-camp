@@ -13,16 +13,16 @@ import {
 } from "react-icons/io5";
 import Sidebar from "../Sidebar/Sidebar";
 // import LoveSign from "../LoveSign/LoveSign";
-import { FavContext } from "../../App";
+// import { FavContext } from "../../App";
 
 function Header() {
   console.log(`Rendered`);
   let navigate = useNavigate();
   let [open, setOpen] = useState(false);
   let [theme, setTheme] = useState("light");
-  let { favstate } = useContext(FavContext);
+  // let { favstate } = useContext(FavContext);
 
-  console.log(favstate);
+  // console.log(favstate);
 
   let { auth, user } = useContext(AuthContext);
   let handleLogout = () => {
@@ -73,7 +73,7 @@ function Header() {
             <NavLink to="/instructors">Instructors</NavLink>
             <NavLink to="/classes">Classes</NavLink>
             <div className=" relative">
-              {favstate > 0 ? <LoveSign count={favstate} /> : ""}
+             
 
               <NavLink to="/dashboard">Dashboard</NavLink>
             </div>

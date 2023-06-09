@@ -16,6 +16,8 @@ import AuthProvider from "./AuthProvider.jsx";
 
 import NotFound from "./components/NotFound/NotFound.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
+import AddClass from "./components/AddClass/AddClass.jsx";
+import MyClasses from "./components/MyClasses/MyClasses.jsx";
 
 let router = createBrowserRouter(
   createRoutesFromElements(
@@ -33,7 +35,10 @@ let router = createBrowserRouter(
             <Dashboard />
           </Protectedroute>
         }
-      />
+      >
+      <Route path="addclass" element={<AddClass />} />
+      <Route path="myclasses" element={<MyClasses/>} />
+      </Route>
       <Route path="*" element={<NotFound />} />
 
       <Route path="/reset" element={<Reset />} />

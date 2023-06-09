@@ -18,7 +18,8 @@ function AuthProvider({ children }) {
             email: user.email,
           })
           .then((response) => {
-            localStorage.setItem("token", response.data);
+            console.log(response.data);
+            localStorage.setItem("token", JSON.stringify(response.data));
           });
       } else {
         localStorage.removeItem("token");
