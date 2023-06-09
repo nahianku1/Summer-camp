@@ -17,7 +17,7 @@ function Signin() {
   let [hidden, setHidden] = useState(true);
   let [error, setError] = useState("");
   let { register, handleSubmit } = useForm();
-  let location=useLocation()
+  let location = useLocation();
   console.log(location);
 
   let { auth } = useContext(AuthContext);
@@ -36,17 +36,18 @@ function Signin() {
   };
 
   let onSubmit = (data) => {
-    
     signInWithEmailAndPassword(auth, data.email, data.password)
       .then((result) => {
-        navigate(location.state);
+        if (location.state) {
+          navigate(location.state);
+        } else {
+          navigate("/");
+        }
       })
       .catch((error) => {
         modifyError(error);
       });
   };
-
-
 
   let handleGoogleSignIn = (e) => {
     e.preventDefault();
@@ -59,7 +60,11 @@ function Signin() {
             email: email,
           })
           .then(() => {
-            navigate(location.state);
+            if (location.state) {
+              navigate(location.state);
+            } else {
+              navigate("/");
+            }
           });
       })
       .catch((error) => {

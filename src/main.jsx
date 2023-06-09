@@ -18,7 +18,10 @@ import NotFound from "./components/NotFound/NotFound.jsx";
 import Dashboard from "./components/Dashboard/Dashboard.jsx";
 import AddClass from "./components/AddClass/AddClass.jsx";
 import MyClasses from "./components/MyClasses/MyClasses.jsx";
-
+import {
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query'
 let router = createBrowserRouter(
   createRoutesFromElements(
     <>
@@ -36,6 +39,7 @@ let router = createBrowserRouter(
           </Protectedroute>
         }
       >
+      <Route index element={<AddClass />} />
       <Route path="addclass" element={<AddClass />} />
       <Route path="myclasses" element={<MyClasses/>} />
       </Route>
@@ -45,10 +49,13 @@ let router = createBrowserRouter(
     </>
   )
 );
+const queryClient = new QueryClient()
 ReactDOM.createRoot(document.getElementById("root")).render(
   <AuthProvider>
+    <QueryClientProvider client={queryClient}>
     <RouterProvider router={router}>
       <App />
     </RouterProvider>
+    </QueryClientProvider>
   </AuthProvider>
 );

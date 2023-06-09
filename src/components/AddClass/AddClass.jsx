@@ -25,23 +25,26 @@ const AddClass = () => {
       .then((res) => res.json())
       .then((imgdata) => {
         console.log(imgdata.data.display_url);
-        photoRef.current = imgdata.data.display_url;
+        let {
+          availableSeats,
+          className,
+          instructorEmail,
+          instructorName,
+          price,
+        } = data;
+        axios
+          .post(`http://localhost:5000/add-class`, {
+            availableSeats,
+            className,
+            instructorEmail,
+            instructorName,
+            price,
+            photo: imgdata.data.display_url,
+          })
+
+          .then((data) => console.log(data));
       });
 
-    console.log(data, photoRef.current);
-    let { availableSeats, className, instructorEmail, instructorName, price } =
-      data;
-    axios
-      .post(`http://localhost:5000/add-class`, {
-        availableSeats,
-        className,
-        instructorEmail,
-        instructorName,
-        price,
-        photo: photoRef.current,
-      })
-
-      .then((data) => console.log(data));
     // reset();
   };
 
