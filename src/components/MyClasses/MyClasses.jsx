@@ -19,6 +19,7 @@ function MyClasses() {
       );
       return res.json();
     },
+  
   });
   console.log(data);
 
@@ -71,7 +72,11 @@ function MyClasses() {
           {data?.map((entry) => (
             <tr key={crypto.randomUUID()}>
               <td>
-                <img src={entry.photo} className="block w-[60px]" alt="" />
+              <img
+                  src={entry.photo}
+                  className="block w-[50px] h-[50px] rounded-full object-cover object-center"
+                  alt=""
+                />
               </td>
               <td>{entry.className}</td>
               <td>{entry.instructorName}</td>
