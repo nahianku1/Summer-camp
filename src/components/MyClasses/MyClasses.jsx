@@ -84,7 +84,7 @@ function MyClasses() {
               <td>{entry.availableSeats}</td>
               <td>{entry.price}</td>
               <td>{entry.enrolled}</td>
-              <td>{entry.feedback}</td>
+              <td>{entry.status === 'denied' ? entry.feedback : 'N/A'}</td>
               <td>{entry.status}</td>
               <td>
                 <button className="px-[15px] py-[10px] bg-red-400 ">

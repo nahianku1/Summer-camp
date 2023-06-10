@@ -9,16 +9,23 @@ import { Vortex } from "react-loader-spinner";
 import { FaEdit } from "react-icons/fa";
 import { useState } from "react";
 import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+import FeedbackModal from "../FeedbackModal/FeedbackModal";
 
 function ManageClasses() {
   let { user, loading } = useContext(AuthContext);
+  let [openmodal, setOpenModal] = useState(false);
+  let [modalinfo, setModalinfo] = useState(null);
+
+
+
 
   let { data, isLoading, error, isError, refetch } = useQuery({
     queryKey: ["manage-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/my-classes?email=${user.email}`
+        `http://localhost:5000/allclasses`
       );
       return res.json();
     },
@@ -52,7 +59,10 @@ function ManageClasses() {
       }
     });
   };
-
+  let handleEdit = (info) => {
+    setModalinfo(info);
+    setOpenModal(true);
+  };
   if (data?.length == 0) {
     console.log("entered");
     return (
@@ -80,8 +90,10 @@ function ManageClasses() {
 
   return (
     <div className="w-[72%]  mt-[20px] mx-[300px]">
+      {openmodal && <FeedbackModal modalinfo={modalinfo} setOpenModal={setOpenModal} />}
+
       <h2 className="text-2xl w-full  text-center font-bold mb-4">
-        My Classes
+        Manage Classes
       </h2>
       <table>
         <thead>
@@ -127,7 +139,12 @@ function ManageClasses() {
                 >
                   Deny
                 </button>
-                <button className="px-[5px]  bg-red-400 ">Send feedback</button>
+                <button
+                  onClick={() => handleEdit(entry)}
+                  className="px-[5px]  bg-red-400 "
+                >
+                  Send feedback
+                </button>
               </td>
             </tr>
           ))}
