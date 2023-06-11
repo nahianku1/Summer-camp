@@ -12,6 +12,8 @@ function DefineUser() {
     return <Navigate to="addclass" />;
   }if (role === "admin") {
     return <Navigate to="manageclasses" />;
+  }if (role === "student") {
+    return <Navigate to="selectedclasses" />;
   }
 }
 

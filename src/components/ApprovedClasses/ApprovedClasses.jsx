@@ -3,14 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import { Vortex } from "react-loader-spinner";
+import { useLocation, useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import axios from "axios";
 
 function ApprovedClasses() {
   let { user, loading } = useContext(AuthContext);
   let [role, setRole] = useState("");
+  let navigate = useNavigate();
+  let location = useLocation();
   useEffect(() => {
-    setRole(JSON.parse(localStorage.getItem("token")).userinfo.role);
+    setRole(JSON.parse(localStorage.getItem("token"))?.userinfo?.role);
   }, []);
-  let { data, isLoading, error, isError, refetch } = useQuery({
+  let { data, isLoading } = useQuery({
     queryKey: ["approved-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
@@ -20,6 +25,34 @@ function ApprovedClasses() {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
+
+  let handleClick = (entry) => {
+    location.state = location.pathname;
+    if (
+      JSON.parse(localStorage.getItem("token"))?.userinfo?.role === undefined
+    ) {
+      navigate("/signin", { state: location.pathname });
+      Swal.fire({
+        title: "Sign In",
+        text: "You must login to continue",
+        icon: "warning",
+      });
+    }
+    axios
+      .post(`http://localhost:5000/selected-class`, {
+        ...entry,
+        user:user.email
+      })
+      .then((data) => {
+        if(data.statusText==='OK'){
+            Swal.fire({
+                title: "Yahoo..",
+                text: "Class Selected Successfully",
+                icon: "success",
+              });
+        }
+      });
+  };
   console.log(role);
   if (isLoading) {
     return (
@@ -57,9 +90,10 @@ function ApprovedClasses() {
             <p className="text-gray-700 text-base mb-2">
               Available Seats: {entry.availableSeats}
             </p>
-            <p className="text-gray-700 text-base mb-2">Price: {entry.price}</p>
-           
+            <p className="text-gray-700 text-base mb-2">Price: ${entry.price}</p>
+
             <button
+              onClick={() => handleClick(entry)}
               disabled={
                 entry.availableSeats === "0"
                   ? true

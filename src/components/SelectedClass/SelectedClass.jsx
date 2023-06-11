@@ -6,63 +6,26 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import { Vortex } from "react-loader-spinner";
-import { FaEdit } from "react-icons/fa";
+import { FaEdit, FaTrash } from "react-icons/fa";
 import { useState } from "react";
 import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import FeedbackModal from "../FeedbackModal/FeedbackModal";
+import { IoLogoUsd } from "react-icons/io5";
 
-function ManageClasses() {
+function SelectedClass() {
   let { user, loading } = useContext(AuthContext);
-  let [openmodal, setOpenModal] = useState(false);
-  let [modalinfo, setModalinfo] = useState(null);
-
-
-
 
   let { data, isLoading, error, isError, refetch } = useQuery({
-    queryKey: ["manage-classes", user?.email],
+    queryKey: ["selected-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(
-        `http://localhost:5000/allclasses`
-      );
+      const res = await fetch(`http://localhost:5000/selectedclasses?email=${user.email}`);
       return res.json();
     },
-    refetchOnMount: false,
     refetchOnWindowFocus: false,
   });
 
-  let handleApprove = (id) => {
-    console.log(id);
-    axios.put(`http://localhost:5000/approve/${id}`).then((data) => {
-      refetch();
-      if (data.statusText === "OK") {
-        Swal.fire({
-          icon: "success",
-          title: "Class Approved",
-          text: "Class Approved Successfully",
-        });
-      }
-    });
-  };
-  let handleDeny = (id) => {
-    console.log(id);
-    axios.put(`http://localhost:5000/deny/${id}`).then((data) => {
-      refetch();
-      if (data.statusText === "OK") {
-        Swal.fire({
-          icon: "success",
-          title: "Class Denied",
-          text: "Class Denied Successfully",
-        });
-      }
-    });
-  };
-  let handleEdit = (info) => {
-    setModalinfo(info);
-    setOpenModal(true);
-  };
   if (data?.length == 0) {
     console.log("entered");
     return (
@@ -71,6 +34,52 @@ function ManageClasses() {
       </h1>
     );
   }
+//   let handlePay = (entry) => {
+//     console.log(entry);
+//     axios
+//       .post(`http://localhost:5000/order`, { ...entry })
+//       .then((data) => {
+//         window.location.replace(data.data)
+//       });
+//   };
+  let handleDelete = async (id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "This action can't be undone.",
+      type: "confirm",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#DD6B55",
+      confirmButtonText: "Yes, Delete it!",
+      cancelButtonText: "No, cancel please!",
+      closeOnConfirm: true,
+      closeOnCancel: true,
+      timer: 3000,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        fetch(`http://localhost:5000/selecteddelete/${id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount) {
+              Swal.fire({
+                title: "Good Job",
+                text: "Deleted Successfully!",
+                icon: "success",
+              });
+              refetch();
+            }
+          });
+      } else {
+        Swal.fire({
+          title: "OK",
+          text: "Delete Cancelled!",
+          icon: "info",
+        });
+      }
+    });
+  };
 
   if (isLoading) {
     return (
@@ -90,10 +99,8 @@ function ManageClasses() {
 
   return (
     <div className="w-[72%]  mt-[20px] mx-[300px]">
-      {openmodal && <FeedbackModal modalinfo={modalinfo} setOpenModal={setOpenModal} />}
-
       <h2 className="text-2xl w-full  text-center font-bold mb-4">
-        Manage Classes
+        My Selected Classes
       </h2>
       <table>
         <thead>
@@ -124,26 +131,18 @@ function ManageClasses() {
               <td>{entry.availableSeats}</td>
               <td>${entry.price}</td>
               <td>{entry.status}</td>
-              <td className="flex gap-3">
+              <td className="space-x-2">
+                <Link to='/dashboard/payment'
+                 
+                  className="px-[5px] rounded-md py-[8px] bg-red-400 disabled:bg-red-800"
+                state={entry}>
+                  Pay
+                </Link>
                 <button
-                  onClick={() => handleApprove(entry._id)}
-                  className="px-[5px]  bg-red-400 disabled:bg-red-800"
-                  disabled={entry.status !== "pending"}
+                  onClick={() => handleDelete(entry._id)}
+                  className="px-[5px] py-[8px] rounded-md bg-red-400 disabled:bg-red-800"
                 >
-                  Approve
-                </button>
-                <button
-                  onClick={() => handleDeny(entry._id)}
-                  className="px-[5px]  bg-red-400 disabled:bg-red-800"
-                  disabled={entry.status !== "pending"}
-                >
-                  Deny
-                </button>
-                <button
-                  onClick={() => handleEdit(entry)}
-                  className="px-[5px]  bg-red-400 "
-                >
-                  Send feedback
+                  <FaTrash />
                 </button>
               </td>
             </tr>
@@ -154,4 +153,4 @@ function ManageClasses() {
   );
 }
 
-export default ManageClasses;
+export default SelectedClass;

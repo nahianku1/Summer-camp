@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 function DashboardSidebar() {
   let [role, setRole] = useState("");
   useEffect(() => {
-    setRole(JSON.parse(localStorage.getItem("token")).userinfo.role);
+    setRole(JSON.parse(localStorage.getItem("token"))?.userinfo?.role);
   }, []);
   return (
     <div className="w-[18%] min-h-screen top-0 left-0 fixed bg-red-400">
@@ -46,6 +46,20 @@ function DashboardSidebar() {
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="manageusers" className="flex items-center gap-2">
                   <IoPeopleSharp /> <span>Manage Users</span>
+                </NavLink>
+              </li>
+            </div>
+          )} 
+          {role === "student" && (
+            <div>
+              <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
+                <NavLink to="selectedclasses" className="flex items-center gap-2">
+                  <IoSchoolSharp /> <span>My Selected Classes</span>
+                </NavLink>
+              </li>
+              <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
+                <NavLink to="enrolledclasses" className="flex items-center gap-2">
+                  <IoPeopleSharp /> <span>My Enrolled Classes</span>
                 </NavLink>
               </li>
             </div>
