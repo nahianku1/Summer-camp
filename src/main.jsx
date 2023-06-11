@@ -22,11 +22,13 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ManageUsers from "./components/ManageUsers/ManageUsers.jsx";
 import ManageClasses from "./components/ManageClasses/ManageClasses.jsx";
 import DefineUser from "./components/DefineUser/DefineUser.jsx";
+import ApprovedClasses from "./components/ApprovedClasses/ApprovedClasses.jsx";
 let router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
+        <Route path="/classes" element={<ApprovedClasses/>} />
 
         <Route path="/register" element={<Register />} />
         <Route path="/signin" element={<Signin />} />
