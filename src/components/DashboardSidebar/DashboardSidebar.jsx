@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { FaAccusoft } from "react-icons/fa";
+import { IoHomeSharp, IoNewspaper, IoPeopleSharp, IoReader, IoSchoolSharp } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 
 function DashboardSidebar() {
@@ -18,19 +19,19 @@ function DashboardSidebar() {
         <ul>
           <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
             <NavLink to="/" className="flex items-center gap-2">
-              <FaAccusoft /> <span>Home</span>
+              <IoHomeSharp /> <span>Home</span>
             </NavLink>
           </li>
           {role === "instructor" && (
             <div>
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="addclass" className="flex items-center gap-2">
-                  <FaAccusoft /> <span>Add Class</span>
+                  <IoReader /> <span>Add Class</span>
                 </NavLink>
               </li>
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="myclasses" className="flex items-center gap-2">
-                  <FaAccusoft /> <span>My Classes</span>
+                  <IoNewspaper /> <span>My Classes</span>
                 </NavLink>
               </li>
             </div>
@@ -39,12 +40,12 @@ function DashboardSidebar() {
             <div>
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="manageclasses" className="flex items-center gap-2">
-                  <FaAccusoft /> <span>Manage Classes</span>
+                  <IoSchoolSharp /> <span>Manage Classes</span>
                 </NavLink>
               </li>
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="manageusers" className="flex items-center gap-2">
-                  <FaAccusoft /> <span>Manage Users</span>
+                  <IoPeopleSharp /> <span>Manage Users</span>
                 </NavLink>
               </li>
             </div>

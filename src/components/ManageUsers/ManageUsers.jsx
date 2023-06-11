@@ -81,7 +81,7 @@ function ManageUsers() {
             <tr key={crypto.randomUUID()}>
               <td>
                 <img
-                  src={user.photoURL}
+                  src={entry.photo}
                   className="block w-[50px] h-[50px] rounded-full object-cover object-center"
                   alt=""
                 />

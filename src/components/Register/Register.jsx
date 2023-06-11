@@ -68,6 +68,7 @@ function Register() {
               .post(`http://localhost:5000/users`, {
                 username: data.username,
                 email: data.email,
+                photo:photoRef.current
               })
               .then(() => {
                 navigate("/");
