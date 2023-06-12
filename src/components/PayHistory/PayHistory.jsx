@@ -6,22 +6,27 @@ import { useQuery } from "@tanstack/react-query";
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider";
 import { Vortex } from "react-loader-spinner";
-import { FaEdit } from "react-icons/fa";
-function MyClasses() {
+import { FaEdit, FaTrash } from "react-icons/fa";
+import { useState } from "react";
+import Swal from "sweetalert2";
+import { useForm } from "react-hook-form";
+import FeedbackModal from "../FeedbackModal/FeedbackModal";
+import { IoLogoUsd } from "react-icons/io5";
+
+function PayHistory() {
   let { user, loading } = useContext(AuthContext);
 
-  let { data, isLoading, error, isError } = useQuery({
-    queryKey: ["my-classes", user?.email],
+  let { data, isLoading, error, isError, refetch } = useQuery({
+    queryKey: ["payhistory", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/my-classes?email=${user.email}`
+        `http://localhost:5000/payhistory?email=${user.email}`
       );
       return res.json();
     },
-  
+    refetchOnWindowFocus: false,
   });
-  console.log(data);
 
   if (data?.length == 0) {
     console.log("entered");
@@ -51,46 +56,28 @@ function MyClasses() {
   return (
     <div className="w-[72%]  mt-[20px] mx-[300px]">
       <h2 className="text-2xl w-full  text-center font-bold mb-4">
-        My Classes
+        My Payment History
       </h2>
       <table>
         <thead>
           <tr className="uppercase">
-            <th>Class Pic</th>
-            <th>Class Name</th>
-            <th>Instructor Name</th>
-            <th>Instructor Email</th>
-            <th>Seats</th>
-            <th>Price</th>
-            <th>Total Enrolled</th>
-            <th>Feedback</th>
-            <th>Status</th>
-            <th>Actions</th>
+            <th>User</th>
+            <th>amount</th>
+            <th>status</th>
+            <th>Payment Method</th>
+            <th>Transaction ID</th>
+            <th>Date</th>
           </tr>
         </thead>
         <tbody>
           {data?.map((entry) => (
             <tr key={crypto.randomUUID()}>
-              <td>
-              <img
-                  src={entry.photo}
-                  className="block w-[50px] h-[50px] rounded-full object-cover object-center"
-                  alt=""
-                />
-              </td>
-              <td>{entry.className}</td>
-              <td>{entry.instructorName}</td>
-              <td>{entry.instructorEmail}</td>
-              <td>{entry.availableSeats}</td>
-              <td>${entry.price}</td>
-              <td>{entry.enrolled}</td>
-              <td>{entry.status === 'denied' ? entry.feedback : 'N/A'}</td>
+              <td>{entry.user}</td>
+              <td>{entry.amount}</td>
               <td>{entry.status}</td>
-              <td>
-                <button className="px-[15px] py-[10px] bg-red-400 ">
-                  <FaEdit />
-                </button>
-              </td>
+              <td>{entry.paymentmethod}</td>
+              <td>{entry.transactionId}</td>
+              <td>{new Date(entry.date).toLocaleString()}</td>
             </tr>
           ))}
         </tbody>
@@ -99,4 +86,4 @@ function MyClasses() {
   );
 }
 
-export default MyClasses;
+export default PayHistory;

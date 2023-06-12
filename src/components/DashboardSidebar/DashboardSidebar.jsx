@@ -61,6 +61,11 @@ function DashboardSidebar() {
                 <NavLink to="enrolledclasses" className="flex items-center gap-2">
                   <IoPeopleSharp /> <span>My Enrolled Classes</span>
                 </NavLink>
+              </li> 
+              <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
+                <NavLink to="payhistory" className="flex items-center gap-2">
+                  <IoPeopleSharp /> <span>Payment History</span>
+                </NavLink>
               </li>
             </div>
           )}

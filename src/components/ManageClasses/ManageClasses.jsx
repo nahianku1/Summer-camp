@@ -97,7 +97,7 @@ function ManageClasses() {
       </h2>
       <table>
         <thead>
-          <tr>
+          <tr className="uppercase">
             <th>Class Pic</th>
             <th>Class Name</th>
             <th>Instructor Name</th>

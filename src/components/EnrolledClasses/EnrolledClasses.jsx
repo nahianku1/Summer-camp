@@ -93,17 +93,18 @@ function EnrolledClasses() {
   return (
     <div className="w-[72%]  mt-[20px] mx-[300px]">
       <h2 className="text-2xl w-full  text-center font-bold mb-4">
-        My Selected Classes
+        My Enrolled Classes
       </h2>
       <table>
         <thead>
-          <tr>
+          <tr className="uppercase">
             <th>Class Pic</th>
             <th>Class Name</th>
             <th>Enrolled User</th>
             <th>Instructor Name</th>
             <th>Instructor Email</th>
             <th>Seats</th>
+            <th>Enrolled</th>
             <th>Price</th>
             <th>Status</th>
             
@@ -124,6 +125,7 @@ function EnrolledClasses() {
               <td>{entry.instructorName}</td>
               <td>{entry.instructorEmail}</td>
               <td>{entry.availableSeats}</td>
+              <td>{entry.enrolled}</td>
               <td>${entry.price}</td>
               <td>{entry.status}</td>
              

@@ -6,15 +6,17 @@ import { useEffect } from "react";
 import { useState } from "react";
 import { AuthContext } from "../../AuthProvider";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function CheckoutForm({ item }) {
-    console.log(item);
+  console.log(item);
   const stripe = useStripe();
   const elements = useElements();
   let [carderror, setCarderror] = useState("");
   let [clientSecret, setClientSecret] = useState("");
   let [processing, setProcessing] = useState(false);
   let { user } = useContext(AuthContext);
+  let navigate = useNavigate();
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     axios
@@ -27,7 +29,7 @@ function CheckoutForm({ item }) {
   const handleSubmit = async (event) => {
     // Block native form submission.
     event.preventDefault();
-    setProcessing(true)
+    setProcessing(true);
     if (!stripe || !elements) {
       // Stripe.js has not loaded yet. Make sure to disable
       // form submission until Stripe.js has loaded.
@@ -73,21 +75,38 @@ function CheckoutForm({ item }) {
         // Handle result.error or result.paymentIntent
         if (result.error) setCarderror(result.error.message);
         if (result.paymentIntent) {
-            console.log(result.paymentIntent.status);
-          if(result.paymentIntent.status ==='succeeded'){
-            axios.post(`http://localhost:5000/enrolled-class`,{
+          console.log(result.paymentIntent.status);
+          console.log("paymentIntent:", result.paymentIntent);
+          let { amount, created, id, payment_method_types, status } =
+            result.paymentIntent;
+          let paymentmethod = payment_method_types[0];
+          let date = new Date(created);
+          console.log(date);
+          if (result.paymentIntent.status === "succeeded") {
+            axios
+              .post(`http://localhost:5000/enrolled-class`, {
                 ...item,
-                user:user.email
-            }).then(data=>{
-                if(data.statusText==='OK'){
-                    Swal.fire({
-                       icon: 'success',
-                       title: 'Yahoo...',
-                       text: 'Class Enrolled Successfully',
-                     
+                user: user.email,
+              })
+              .then((data) => {
+                if (data.statusText === "OK") {
+                  axios
+                    .post(`http://localhost:5000/payhistory`, {
+                      amount: amount / 100,
+                      transactionId: id,
+                      paymentmethod,
+                      status,
+                      user: user.email,
                     })
+                    .then((data) => console.log(data));
+                  Swal.fire({
+                    icon: "success",
+                    title: "Yahoo...",
+                    text: "Class Enrolled Successfully",
+                  });
+                  //   navigate('/dashboard/enrolledclasses')
                 }
-            })
+              });
           }
         }
       });

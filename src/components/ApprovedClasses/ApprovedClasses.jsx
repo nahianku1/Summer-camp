@@ -27,6 +27,7 @@ function ApprovedClasses() {
   });
 
   let handleClick = (entry) => {
+    console.log(entry._id);
     location.state = location.pathname;
     if (
       JSON.parse(localStorage.getItem("token"))?.userinfo?.role === undefined
@@ -41,15 +42,22 @@ function ApprovedClasses() {
     axios
       .post(`http://localhost:5000/selected-class`, {
         ...entry,
-        user:user.email
+        user: user.email,
       })
       .then((data) => {
-        if(data.statusText==='OK'){
-            Swal.fire({
-                title: "Yahoo..",
-                text: "Class Selected Successfully",
-                icon: "success",
-              });
+        console.log(data);
+        if (data.statusText === "OK") {
+          Swal.fire({
+            title: "Yahoo..",
+            text: "Class Selected Successfully",
+            icon: "success",
+          });
+        } else {
+          Swal.fire({
+            title: "Oops..",
+            text: "Class already Selected",
+            icon: "info",
+          });
         }
       });
   };
@@ -90,7 +98,9 @@ function ApprovedClasses() {
             <p className="text-gray-700 text-base mb-2">
               Available Seats: {entry.availableSeats}
             </p>
-            <p className="text-gray-700 text-base mb-2">Price: ${entry.price}</p>
+            <p className="text-gray-700 text-base mb-2">
+              Price: ${entry.price}
+            </p>
 
             <button
               onClick={() => handleClick(entry)}

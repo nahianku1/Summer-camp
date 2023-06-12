@@ -68,7 +68,7 @@ function ManageUsers() {
       <h2 className="text-2xl text-center font-bold mb-4">Manage Users</h2>
       <table>
         <thead>
-          <tr>
+          <tr className="uppercase">
             <th>User Pic</th>
             <th>User Name</th>
             <th>User Email</th>

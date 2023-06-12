@@ -27,12 +27,15 @@ import SelectedClass from "./components/SelectedClass/SelectedClass.jsx";
 import PaymentSuccess from "./components/Payment/Payment.jsx";
 import Payment from "./components/Payment/Payment.jsx";
 import EnrolledClasses from "./components/EnrolledClasses/EnrolledClasses.jsx";
+import PayHistory from "./components/PayHistory/PayHistory.jsx";
+import Instructor from "./components/Instructor/Instructor.jsx";
 let router = createBrowserRouter(
   createRoutesFromElements(
     <>
       <Route path="/" element={<App />}>
         <Route index element={<Home />} />
         <Route path="/classes" element={<ApprovedClasses/>} />
+        <Route path="/instructors" element={<Instructor/>} />
         
         
         <Route path="/register" element={<Register />} />
@@ -53,6 +56,7 @@ let router = createBrowserRouter(
         <Route path="manageusers" element={<ManageUsers />} />
         <Route path="selectedclasses" element={<SelectedClass/>} />
         <Route path="enrolledclasses" element={<EnrolledClasses/>} />
+        <Route path="payhistory" element={<PayHistory/>} />
         <Route path="payment" element={<Payment/>} />
       </Route>
       <Route path="*" element={<NotFound />} />
