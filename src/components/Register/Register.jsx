@@ -1,11 +1,17 @@
 import { useContext, useRef, useState } from "react";
-import { FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
+import { FaLock, FaEye, FaEyeSlash, FaGoogle } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithPopup,
+  updateProfile,
+} from "firebase/auth";
 import { AuthContext } from "../../AuthProvider";
 import { IoPersonSharp } from "react-icons/io5";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+let GoogleProvider = new GoogleAuthProvider();
 
 function Register() {
   let [hidden, setHidden] = useState(true);
@@ -46,7 +52,10 @@ function Register() {
         photoRef.current = imgdata.data.display_url;
       });
     console.log(data);
-    if (data.password !== data.cpassword) {
+    if (data.password.length < 6) {
+      setError(`Password should be 6 character long`);
+      return;
+    } else if (data.password !== data.cpassword) {
       setError(`Password didn't matched`);
       return;
     } else if (!capitalregex.test(data.password)) {
@@ -65,10 +74,10 @@ function Register() {
         })
           .then(() => {
             axios
-              .post(`http://localhost:5000/users`, {
+              .post(`https://summer-camp-server-henna.vercel.app/users`, {
                 username: data.username,
                 email: data.email,
-                photo:photoRef.current
+                photo: photoRef.current,
               })
               .then(() => {
                 navigate("/");
@@ -83,6 +92,30 @@ function Register() {
         modifyError(error);
       });
   };
+
+  let handleGoogleSignIn = (e) => {
+    e.preventDefault();
+    signInWithPopup(auth, GoogleProvider)
+      .then((result) => {
+        const { displayName, email } = result.user;
+        axios
+          .post(`https://summer-camp-server-henna.vercel.app/users`, {
+            username: displayName,
+            email: email,
+          })
+          .then(() => {
+            if (location.state) {
+              navigate(location.state);
+            } else {
+              navigate("/");
+            }
+          });
+      })
+      .catch((error) => {
+        modifyError(error);
+      });
+  };
+
   return (
     <div className="flex justify-center items-center  py-[30px]">
       <div className="bg-white border border-solid border-black w-[320px] md:w-[400px] py-[30px] rounded-md ">
@@ -190,7 +223,21 @@ function Register() {
               Login
             </Link>
           </p>
+          <div className="flex items-center justify-center gap-3">
+            <div className="h-[2px] w-[90px] bg-slate-300"></div>
+            <div className="relative -top-[1px]">OR</div>
+            <div className="h-[2px] w-[90px] bg-slate-300"></div>
+          </div>
         </form>
+        <div className="flex flex-col gap-4 px-[70px] mt-[20px]">
+          <button
+            onClick={handleGoogleSignIn}
+            className="bg-[#f788c7] rounded-md text-white flex items-center justify-center gap-2 py-2 px-2 md:px-4"
+          >
+            <FaGoogle className="text-white text-2xl" />
+            Login with Google
+          </button>
+        </div>
       </div>
     </div>
   );

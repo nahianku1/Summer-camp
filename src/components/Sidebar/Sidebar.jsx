@@ -23,15 +23,19 @@ function Sidebar({ setOpen }) {
       <NavLink to="/" className="link" onClick={() => setOpen(false)}>
         Home
       </NavLink>
-      <NavLink className="link" to="/about" onClick={() => setOpen(false)}>
-        About
+      <NavLink
+        className="link"
+        to="/instructors"
+        onClick={() => setOpen(false)}
+      >
+        Instructors
       </NavLink>
 
-      <NavLink className="link" to="/blog" onClick={() => setOpen(false)}>
-        Blog
+      <NavLink className="link" to="/classes" onClick={() => setOpen(false)}>
+        Classes
       </NavLink>
-      <NavLink className="link" to="/favorite" onClick={() => setOpen(false)}>
-        Favorite
+      <NavLink className="link" to="/dashboard" onClick={() => setOpen(false)}>
+        Dashboard
       </NavLink>
     </div>
   );

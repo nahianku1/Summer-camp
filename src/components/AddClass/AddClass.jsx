@@ -34,7 +34,7 @@ const AddClass = () => {
           price,
         } = data;
         axios
-          .post(`http://localhost:5000/add-class`, {
+          .post(`https://summer-camp-server-henna.vercel.app/add-class`, {
             availableSeats,
             className,
             instructorEmail,
@@ -44,7 +44,7 @@ const AddClass = () => {
           })
 
           .then((data) => {
-            if(data.statusText=='OK'){
+            if(data.status==200){
                 Swal.fire({
                     icon: "success",
                     title: "Yahoo...",
@@ -133,7 +133,7 @@ const AddClass = () => {
         </div>
         <button
           type="submit"
-          className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+          className="bg-red-400 hover:bg-red-600 text-white font-bold py-2 px-4 rounded"
         >
           Submit
         </button>

@@ -10,11 +10,11 @@ const FeedbackModal = ({ modalinfo, setOpenModal }) => {
     // Perform form submission or data handling logic here
     console.log(data);
     axios
-      .put(`http://localhost:5000/addfeedback/${modalinfo._id}`, {
+      .put(`https://summer-camp-server-henna.vercel.app/addfeedback/${modalinfo._id}`, {
         feedback: data.feedback,
       })
       .then((data) => {
-        if (data.statusText === "OK") {
+        if (data.status === 200) {
           setOpenModal(false);
           Swal.fire({
             icon: "success",

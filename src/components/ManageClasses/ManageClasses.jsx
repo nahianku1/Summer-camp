@@ -25,7 +25,7 @@ function ManageClasses() {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/allclasses`
+        `https://summer-camp-server-henna.vercel.app/allclasses`
       );
       return res.json();
     },
@@ -35,9 +35,9 @@ function ManageClasses() {
 
   let handleApprove = (id) => {
     console.log(id);
-    axios.put(`http://localhost:5000/approve/${id}`).then((data) => {
+    axios.put(`https://summer-camp-server-henna.vercel.app/approve/${id}`).then((data) => {
       refetch();
-      if (data.statusText === "OK") {
+      if (data.status === 200) {
         Swal.fire({
           icon: "success",
           title: "Class Approved",
@@ -48,9 +48,9 @@ function ManageClasses() {
   };
   let handleDeny = (id) => {
     console.log(id);
-    axios.put(`http://localhost:5000/deny/${id}`).then((data) => {
+    axios.put(`https://summer-camp-server-henna.vercel.app/deny/${id}`).then((data) => {
       refetch();
-      if (data.statusText === "OK") {
+      if (data.status === 200) {
         Swal.fire({
           icon: "success",
           title: "Class Denied",

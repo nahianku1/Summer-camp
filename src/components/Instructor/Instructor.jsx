@@ -13,7 +13,7 @@ function Instructor() {
     queryKey: ["manage-users", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/instructor`);
+      const res = await fetch(`https://summer-camp-server-henna.vercel.app/instructor`);
       return res.json();
     },
     refetchOnMount: false,
@@ -38,6 +38,7 @@ function Instructor() {
 
   return (
     <div className="overflow-x-auto min-h-screen my-[40px] mx-[60px]">
+        <h1 className="text-center text-2xl font-pacifico font-bold mt-[40px] mb-[30px]">Instructor</h1>
       <table className="min-w-full bg-white">
         <thead className="">
           <tr className="">

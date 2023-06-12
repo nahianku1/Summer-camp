@@ -14,7 +14,7 @@ import { Pagination, Navigation, Autoplay } from "swiper";
 function HomeBanner() {
   return (
     <div className="bg-[#F9F9FF] dark:bg-slate-800">
-      <div className=" mx-[20px]  md:mx-[120px] py-[40px] flex gap-5 flex-wrap md:flex-nowrap">
+      <div className=" mx-[20px]  mt-[40px] md:mx-[120px] py-[40px] flex gap-5 flex-wrap md:flex-nowrap">
         <Swiper
           className={styles.swiper}
           slidesPerView={1}

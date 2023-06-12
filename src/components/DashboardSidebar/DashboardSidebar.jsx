@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { FaAccusoft } from "react-icons/fa";
+import { FaAccusoft, FaCcVisa, FaLeanpub, FaReadme } from "react-icons/fa";
 import { IoHomeSharp, IoNewspaper, IoPeopleSharp, IoReader, IoSchoolSharp } from "react-icons/io5";
 import { NavLink } from "react-router-dom";
 
@@ -54,17 +54,17 @@ function DashboardSidebar() {
             <div>
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="selectedclasses" className="flex items-center gap-2">
-                  <IoSchoolSharp /> <span>My Selected Classes</span>
+                  <FaReadme /> <span>My Selected Classes</span>
                 </NavLink>
               </li>
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="enrolledclasses" className="flex items-center gap-2">
-                  <IoPeopleSharp /> <span>My Enrolled Classes</span>
+                  <FaLeanpub /> <span>My Enrolled Classes</span>
                 </NavLink>
               </li> 
               <li className="  text-white py-[10px] px-[8px] flex gap-2 items-center ">
                 <NavLink to="payhistory" className="flex items-center gap-2">
-                  <IoPeopleSharp /> <span>Payment History</span>
+                  <FaCcVisa /> <span>Payment History</span>
                 </NavLink>
               </li>
             </div>

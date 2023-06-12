@@ -55,7 +55,7 @@ function Signin() {
       .then((result) => {
         const { displayName, email } = result.user;
         axios
-          .post(`http://localhost:5000/users`, {
+          .post(`https://summer-camp-server-henna.vercel.app/users`, {
             username: displayName,
             email: email,
           })
@@ -122,12 +122,7 @@ function Signin() {
                 )}
               </div>
 
-              <p className="text-[13px]">
-                Forgot password?{" "}
-                <Link to="/reset" className="underline">
-                  Click here.
-                </Link>
-              </p>
+             
             </div>
             {error && <p className="text-red-600 font-bold">{error}</p>}
 

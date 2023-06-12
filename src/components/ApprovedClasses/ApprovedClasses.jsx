@@ -19,7 +19,7 @@ function ApprovedClasses() {
     queryKey: ["approved-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/approvedclasses`);
+      const res = await fetch(`https://summer-camp-server-henna.vercel.app/approvedclasses`);
       return res.json();
     },
     refetchOnMount: false,
@@ -40,22 +40,28 @@ function ApprovedClasses() {
       });
     }
     axios
-      .post(`http://localhost:5000/selected-class`, {
+      .post(`https://summer-camp-server-henna.vercel.app/selected-class`, {
         ...entry,
         user: user.email,
       })
       .then((data) => {
         console.log(data);
-        if (data.statusText === "OK") {
+        if (data.status === 200) {
           Swal.fire({
             title: "Yahoo..",
             text: "Class Selected Successfully",
             icon: "success",
           });
-        } else {
+        } else if (data.status === 210) {
           Swal.fire({
             title: "Oops..",
             text: "Class already Selected",
+            icon: "info",
+          });
+        } else if (data.status === 220) {
+          Swal.fire({
+            title: "Oops..",
+            text: "Class already Enrolled",
             icon: "info",
           });
         }
@@ -78,48 +84,51 @@ function ApprovedClasses() {
     );
   }
   return (
-    <div className="min-h-screen  text-center flex items-start justify-center  flex-wrap gap-4 mx-[120px] my-[40px]">
-      {data?.map((entry) => (
-        <div
-          key={crypto.randomUUID()}
-          className={`min-w-[300px]  ${
-            entry.availableSeats === "0" ? "bg-red-500" : ""
-          } flex flex-col p-[10px] items-center justify-center rounded overflow-hidden shadow-2xl`}
-        >
-          <img
-            src={entry.photo}
-            className="block object-cover object-center w-[150px] h-[150px] rounded-full"
-          />
-          <div className="px-6 py-4 flex flex-col justify-center">
-            <div className="font-bold text-xl mb-2">{entry.className}</div>
-            <p className="text-gray-700 text-base mb-2">
-              Instructor: {entry.instructorName}
-            </p>
-            <p className="text-gray-700 text-base mb-2">
-              Available Seats: {entry.availableSeats}
-            </p>
-            <p className="text-gray-700 text-base mb-2">
-              Price: ${entry.price}
-            </p>
+    <div >
+      <h1 className="text-center text-2xl font-pacifico font-bold mt-[40px] mb-[30px]">Classes</h1>
+      <div className="min-h-screen  text-center flex items-start justify-center  flex-wrap gap-4 mx-[120px] my-[40px]">
+        {data?.map((entry) => (
+          <div
+            key={crypto.randomUUID()}
+            className={`min-w-[300px]  ${
+              entry.availableSeats == '0' ? "bg-red-500" : ""
+            } flex flex-col p-[10px] items-center justify-center rounded overflow-hidden shadow-2xl`}
+          >
+            <img
+              src={entry.photo}
+              className="block object-cover object-center w-[150px] h-[150px] rounded-full"
+            />
+            <div className="px-6 py-4 flex flex-col justify-center">
+              <div className="font-bold text-xl mb-2">{entry.className}</div>
+              <p className="text-gray-700 text-base mb-2">
+                Instructor: {entry.instructorName}
+              </p>
+              <p className="text-gray-700 text-base mb-2">
+                Available Seats: {entry.availableSeats}
+              </p>
+              <p className="text-gray-700 text-base mb-2">
+                Price: ${entry.price}
+              </p>
 
-            <button
-              onClick={() => handleClick(entry)}
-              disabled={
-                entry.availableSeats === "0"
-                  ? true
-                  : role === "admin"
-                  ? true
-                  : role === "instructor"
-                  ? true
-                  : false
-              }
-              className="bg-red-400  hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
-            >
-              Select
-            </button>
+              <button
+                onClick={() => handleClick(entry)}
+                disabled={
+                  entry.availableSeats == '0'
+                    ? true
+                    : role === "admin"
+                    ? true
+                    : role === "instructor"
+                    ? true
+                    : false
+                }
+                className="bg-red-400  hover:bg-red-700 text-white font-bold py-2 px-4 rounded"
+              >
+                Select
+              </button>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </div>
   );
 }

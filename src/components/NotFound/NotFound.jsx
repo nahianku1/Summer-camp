@@ -11,7 +11,7 @@ const NotFound = () => {
       <p className="text-lg text-gray-600 dark:text-white  text-center max-w-md mb-8">
         We're sorry, but the page you requested could not be found.
       </p>
-      <Link to="/" className=" font-bold   cursor-pointer bg-lime-400 px-[15px] py-[10px]">
+      <Link to="/" className=" font-bold   cursor-pointer bg-red-400 px-[15px] py-[10px]">
         Go Home
       </Link>
     </div>

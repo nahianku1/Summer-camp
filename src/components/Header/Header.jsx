@@ -73,8 +73,6 @@ function Header() {
             <NavLink to="/instructors">Instructors</NavLink>
             <NavLink to="/classes">Classes</NavLink>
             <div className=" relative">
-             
-
               <NavLink to="/dashboard">Dashboard</NavLink>
             </div>
           </div>
@@ -91,7 +89,7 @@ function Header() {
           )}
           {user && user?.photoURL ? (
             <>
-              <Link to="/userprofile">
+              <Link to="">
                 <img
                   data-tooltip-id="registerTip"
                   data-tooltip-content={auth?.currentUser?.displayName}
@@ -103,9 +101,16 @@ function Header() {
               <Tooltip id="registerTip" place="top" effect="solid" />
             </>
           ) : user && !user?.photoURL ? (
-            <Link to="/userprofile">
-              <IoPersonCircleSharp className="text-3xl cursor-pointer" />
-            </Link>
+            <>
+              <Link to="">
+                <IoPersonCircleSharp
+                  data-tooltip-id="registerTip"
+                  data-tooltip-content={auth?.currentUser?.displayName}
+                  className="text-3xl cursor-pointer"
+                />
+              </Link>
+              <Tooltip id="registerTip" place="top" effect="solid" />
+            </>
           ) : (
             ""
           )}

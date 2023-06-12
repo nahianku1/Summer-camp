@@ -20,7 +20,7 @@ function CheckoutForm({ item }) {
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     axios
-      .post("http://localhost:5000/order", {
+      .post("https://summer-camp-server-henna.vercel.app/order", {
         ...item,
       })
 
@@ -84,14 +84,15 @@ function CheckoutForm({ item }) {
           console.log(date);
           if (result.paymentIntent.status === "succeeded") {
             axios
-              .post(`http://localhost:5000/enrolled-class`, {
+              .post(`https://summer-camp-server-henna.vercel.app/enrolled-class`, {
                 ...item,
                 user: user.email,
               })
               .then((data) => {
-                if (data.statusText === "OK") {
+                console.log(data);
+                if (data.status === 200) {
                   axios
-                    .post(`http://localhost:5000/payhistory`, {
+                    .post(`https://summer-camp-server-henna.vercel.app/payhistory`, {
                       amount: amount / 100,
                       transactionId: id,
                       paymentmethod,
@@ -104,7 +105,7 @@ function CheckoutForm({ item }) {
                     title: "Yahoo...",
                     text: "Class Enrolled Successfully",
                   });
-                  //   navigate('/dashboard/enrolledclasses')
+                  navigate("/dashboard/enrolledclasses");
                 }
               });
           }

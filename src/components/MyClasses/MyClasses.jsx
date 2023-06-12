@@ -15,7 +15,7 @@ function MyClasses() {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/my-classes?email=${user.email}`
+        `https://summer-camp-server-henna.vercel.app/my-classes?email=${user.email}`
       );
       return res.json();
     },

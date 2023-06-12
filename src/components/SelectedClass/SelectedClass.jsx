@@ -20,7 +20,7 @@ function SelectedClass() {
     queryKey: ["selected-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/selectedclasses?email=${user.email}`);
+      const res = await fetch(`https://summer-camp-server-henna.vercel.app/selectedclasses?email=${user.email}`);
       return res.json();
     },
     refetchOnWindowFocus: false,
@@ -34,14 +34,7 @@ function SelectedClass() {
       </h1>
     );
   }
-//   let handlePay = (entry) => {
-//     console.log(entry);
-//     axios
-//       .post(`http://localhost:5000/order`, { ...entry })
-//       .then((data) => {
-//         window.location.replace(data.data)
-//       });
-//   };
+
   let handleDelete = async (id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -57,7 +50,7 @@ function SelectedClass() {
       timer: 3000,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/selecteddelete/${id}`, {
+        fetch(`https://summer-camp-server-henna.vercel.app/selecteddelete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

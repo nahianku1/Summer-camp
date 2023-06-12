@@ -9,59 +9,59 @@ function TopClasses() {
       <div className="flex flex-wrap items-center gap-7  justify-center">
         <div className="w-[270px] h-[270px] my-[40px] rounded-full border-[5px] border-solid border-red-400">
           <img
-            src="/images/slide1.jpg"
+            src="/images/class1.jpg"
             alt=""
             className="block w-full h-full object-cover object-center rounded-full"
           />
           <p className="text-center bg-black text-white p-[10px] mt-[10px]">
-            Students: 200
+            Students: 45
           </p>
         </div>
         <div className="w-[270px] h-[270px] my-[20px] rounded-full border-[5px] border-solid border-red-400">
           <img
-            src="/images/slide1.jpg"
+            src="/images/class2.jpg"
             alt=""
             className="block w-full h-full object-cover object-center rounded-full"
           />
           <p className="text-center bg-black text-white p-[10px] mt-[10px]">
-            Students: 200
+            Students: 77
           </p>
         </div>
         <div className="w-[270px] h-[270px] my-[20px] rounded-full border-[5px] border-solid border-red-400">
           <img
-            src="/images/slide1.jpg"
+            src="/images/class3.jpg"
             alt=""
             className="block w-full h-full object-cover object-center rounded-full"
           />
           <p className="text-center bg-black text-white p-[10px] mt-[10px]">
-            Students: 200
+            Students: 89
           </p>
         </div><div className="w-[270px] h-[270px] my-[20px] rounded-full border-[5px] border-solid border-red-400">
           <img
-            src="/images/slide1.jpg"
+            src="/images/class4.jpg"
             alt=""
             className="block w-full h-full object-cover object-center rounded-full"
           />
           <p className="text-center bg-black text-white p-[10px] mt-[10px]">
-            Students: 200
+            Students: 56
           </p>
         </div><div className="w-[270px] h-[270px] my-[20px] rounded-full border-[5px] border-solid border-red-400">
           <img
-            src="/images/slide1.jpg"
+            src="/images/class5.jpg"
             alt=""
             className="block w-full h-full object-cover object-center rounded-full"
           />
           <p className="text-center bg-black text-white p-[10px] mt-[10px]">
-            Students: 200
+            Students: 69
           </p>
         </div><div className="w-[270px] h-[270px] my-[20px] rounded-full border-[5px] border-solid border-red-400">
           <img
-            src="/images/slide1.jpg"
+            src="/images/class6.jpg"
             alt=""
             className="block w-full h-full object-cover object-center rounded-full"
           />
           <p className="text-center bg-black text-white p-[10px] mt-[10px]">
-            Students: 200
+            Students: 48
           </p>
         </div>
       </div>

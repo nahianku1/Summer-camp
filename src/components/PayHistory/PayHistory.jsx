@@ -21,7 +21,7 @@ function PayHistory() {
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(
-        `http://localhost:5000/payhistory?email=${user.email}`
+        `https://summer-camp-server-henna.vercel.app/payhistory?email=${user.email}`
       );
       return res.json();
     },

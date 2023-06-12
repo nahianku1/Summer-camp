@@ -20,7 +20,7 @@ function EnrolledClasses() {
     queryKey: ["enrolled-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/enrolledclasses?email=${user.email}`);
+      const res = await fetch(`https://summer-camp-server-henna.vercel.app/enrolledclasses?email=${user.email}`);
       return res.json();
     },
     refetchOnWindowFocus: false,
@@ -50,7 +50,7 @@ function EnrolledClasses() {
       timer: 3000,
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/selecteddelete/${id}`, {
+        fetch(`https://summer-camp-server-henna.vercel.app/selecteddelete/${id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())

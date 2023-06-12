@@ -13,7 +13,7 @@ function ManageUsers() {
     queryKey: ["manage-users", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`http://localhost:5000/users`);
+      const res = await fetch(`https://summer-camp-server-henna.vercel.app/users`);
       return res.json();
     },
     refetchOnMount: false,
@@ -37,9 +37,9 @@ function ManageUsers() {
   }
 
   let makeAdmin =(id)=>{
-    axios.put(`http://localhost:5000/makeadmin/${id}`).then((data) => {
+    axios.put(`https://summer-camp-server-henna.vercel.app/makeadmin/${id}`).then((data) => {
         refetch();
-        if (data.statusText === "OK") {
+        if (data.status === 200) {
           Swal.fire({
             icon: "success",
             title: "Yahoo..",
@@ -50,9 +50,9 @@ function ManageUsers() {
   }
 
   let makeInstructor =(id)=>{
-    axios.put(`http://localhost:5000/makeinstructor/${id}`).then((data) => {
+    axios.put(`https://summer-camp-server-henna.vercel.app/makeinstructor/${id}`).then((data) => {
         refetch();
-        if (data.statusText === "OK") {
+        if (data.status === 200) {
           Swal.fire({
             icon: "success",
             title: "Yahoo..",

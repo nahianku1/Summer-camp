@@ -9,7 +9,6 @@ import {
 } from "react-router-dom";
 import Home from "./components/Home/Home.jsx";
 import Signin from "./components/Signin/Signin.jsx";
-import Reset from "./components/Reset/Reset.jsx";
 import Register from "./components/Register/Register.jsx";
 import Protectedroute from "./components/Protectedroute/Protectedroute.jsx";
 import AuthProvider from "./AuthProvider.jsx";
@@ -61,7 +60,6 @@ let router = createBrowserRouter(
       </Route>
       <Route path="*" element={<NotFound />} />
       
-      <Route path="/reset" element={<Reset />} />
     </>
   )
 );
