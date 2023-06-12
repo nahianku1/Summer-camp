@@ -19,7 +19,9 @@ function ApprovedClasses() {
     queryKey: ["approved-classes", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`https://summer-camp-server-henna.vercel.app/approvedclasses`);
+      const res = await fetch(
+        `https://summer-camp-server-henna.vercel.app/approvedclasses`
+      );
       return res.json();
     },
     refetchOnMount: false,
@@ -83,15 +85,27 @@ function ApprovedClasses() {
       </div>
     );
   }
+
+  if (data?.length == 0) {
+    console.log("entered");
+    return (
+      <h1 className=" min-h-screen font-bold  text-center mt-[80px] mx-[300px] text-black text-2xl">
+        No item Found!
+      </h1>
+    );
+  }
+
   return (
-    <div >
-      <h1 className="text-center text-2xl font-pacifico font-bold mt-[40px] mb-[30px]">Classes</h1>
+    <div>
+      <h1 className="text-center text-2xl font-pacifico font-bold mt-[40px] mb-[30px]">
+        Classes
+      </h1>
       <div className="min-h-screen  text-center flex items-start justify-center  flex-wrap gap-4 mx-[120px] my-[40px]">
         {data?.map((entry) => (
           <div
             key={crypto.randomUUID()}
             className={`min-w-[300px]  ${
-              entry.availableSeats == '0' ? "bg-red-500" : ""
+              entry.availableSeats == "0" ? "bg-red-500" : ""
             } flex flex-col p-[10px] items-center justify-center rounded overflow-hidden shadow-2xl`}
           >
             <img
@@ -113,7 +127,7 @@ function ApprovedClasses() {
               <button
                 onClick={() => handleClick(entry)}
                 disabled={
-                  entry.availableSeats == '0'
+                  entry.availableSeats == "0"
                     ? true
                     : role === "admin"
                     ? true

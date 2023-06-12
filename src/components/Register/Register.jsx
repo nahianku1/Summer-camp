@@ -17,10 +17,10 @@ function Register() {
   let [hidden, setHidden] = useState(true);
   let [error, setError] = useState("");
   const { register, handleSubmit } = useForm();
+  let [photo, setPhoto] = useState("");
   // const onSubmit = data => console.log(data);
   const capitalregex = /[A-Z]+/;
   const specialRegex = /[!@#$%^&*()~`]+/;
-  let photoRef = useRef("");
   let navigate = useNavigate();
   let { auth } = useContext(AuthContext);
 
@@ -49,7 +49,8 @@ function Register() {
       .then((res) => res.json())
       .then((imgdata) => {
         console.log(imgdata.data.display_url);
-        photoRef.current = imgdata.data.display_url;
+        setPhoto(imgdata.data.display_url) ;
+        console.log('photo',photo);
       });
     console.log(data);
     if (data.password.length < 6) {
@@ -68,16 +69,17 @@ function Register() {
     }
     createUserWithEmailAndPassword(auth, data.email, data.password)
       .then(() => {
+        console.log("photo: ", photo);
         updateProfile(auth.currentUser, {
           displayName: data.username,
-          photoURL: photoRef.current,
+          photoURL: photo,
         })
           .then(() => {
             axios
-              .post(`https://summer-camp-server-henna.vercel.app/users`, {
+              .post(`http://localhost:5000/users`, {
                 username: data.username,
                 email: data.email,
-                photo: photoRef.current,
+                photo: photo,
               })
               .then(() => {
                 navigate("/");

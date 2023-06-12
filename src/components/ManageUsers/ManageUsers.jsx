@@ -13,7 +13,9 @@ function ManageUsers() {
     queryKey: ["manage-users", user?.email],
     enabled: !loading,
     queryFn: async () => {
-      const res = await fetch(`https://summer-camp-server-henna.vercel.app/users`);
+      const res = await fetch(
+        `https://summer-camp-server-henna.vercel.app/users`
+      );
       return res.json();
     },
     refetchOnMount: false,
@@ -36,21 +38,19 @@ function ManageUsers() {
     );
   }
 
-  let makeAdmin =(id)=>{
-    axios.put(`https://summer-camp-server-henna.vercel.app/makeadmin/${id}`).then((data) => {
-        refetch();
-        if (data.status === 200) {
-          Swal.fire({
-            icon: "success",
-            title: "Yahoo..",
-            text: "User Updated Successfully",
-          });
-        }
-      });
+  if (data?.length == 0) {
+    console.log("entered");
+    return (
+      <h1 className="w-[72%]  mt-[20px] mx-[300px] text-black text-2xl">
+        No item Found!
+      </h1>
+    );
   }
 
-  let makeInstructor =(id)=>{
-    axios.put(`https://summer-camp-server-henna.vercel.app/makeinstructor/${id}`).then((data) => {
+  let makeAdmin = (id) => {
+    axios
+      .put(`https://summer-camp-server-henna.vercel.app/makeadmin/${id}`)
+      .then((data) => {
         refetch();
         if (data.status === 200) {
           Swal.fire({
@@ -60,8 +60,22 @@ function ManageUsers() {
           });
         }
       });
-    
-  }
+  };
+
+  let makeInstructor = (id) => {
+    axios
+      .put(`https://summer-camp-server-henna.vercel.app/makeinstructor/${id}`)
+      .then((data) => {
+        refetch();
+        if (data.status === 200) {
+          Swal.fire({
+            icon: "success",
+            title: "Yahoo..",
+            text: "User Updated Successfully",
+          });
+        }
+      });
+  };
 
   return (
     <div className="w-[72%]  mt-[20px] mx-[300px]">
@@ -92,14 +106,14 @@ function ManageUsers() {
 
               <td className=" space-x-3">
                 <button
-                    onClick={() => makeAdmin(entry._id)}
+                  onClick={() => makeAdmin(entry._id)}
                   className="px-[5px]  bg-red-400 disabled:bg-red-800"
                 >
                   Make admin
                 </button>
 
                 <button
-                    onClick={() => makeInstructor(entry._id)}
+                  onClick={() => makeInstructor(entry._id)}
                   className="px-[5px]  bg-red-400 disabled:bg-red-800"
                 >
                   Make instructor

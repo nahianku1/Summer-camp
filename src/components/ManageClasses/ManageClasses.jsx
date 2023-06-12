@@ -63,6 +63,7 @@ function ManageClasses() {
     setModalinfo(info);
     setOpenModal(true);
   };
+  
   if (data?.length == 0) {
     console.log("entered");
     return (

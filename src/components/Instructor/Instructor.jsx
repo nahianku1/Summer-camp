@@ -10,7 +10,7 @@ function Instructor() {
   let { user, loading } = useContext(AuthContext);
 
   let { data, isLoading, error, isError, refetch } = useQuery({
-    queryKey: ["manage-users", user?.email],
+    queryKey: ["instructor", user?.email],
     enabled: !loading,
     queryFn: async () => {
       const res = await fetch(`https://summer-camp-server-henna.vercel.app/instructor`);
@@ -33,6 +33,15 @@ function Instructor() {
           colors={["red", "green", "blue", "yellow", "orange", "purple"]}
         />
       </div>
+    );
+  }
+
+  if (data?.length == 0) {
+    console.log("entered");
+    return (
+      <h1 className=" min-h-screen font-bold  text-center mt-[80px] mx-[300px] text-black text-2xl">
+        No item Found!
+      </h1>
     );
   }
 

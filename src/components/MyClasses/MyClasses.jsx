@@ -49,7 +49,7 @@ function MyClasses() {
   }
 
   return (
-    <div className="w-[72%]  mt-[20px] mx-[300px]">
+    <div className="w-[72%] mb-[40px] mt-[20px] mx-[300px]">
       <h2 className="text-2xl w-full  text-center font-bold mb-4">
         My Classes
       </h2>

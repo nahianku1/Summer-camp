@@ -73,7 +73,7 @@ function PayHistory() {
           {data?.map((entry) => (
             <tr key={crypto.randomUUID()}>
               <td>{entry.user}</td>
-              <td>{entry.amount}</td>
+              <td>${entry.amount}</td>
               <td>{entry.status}</td>
               <td>{entry.paymentmethod}</td>
               <td>{entry.transactionId}</td>
