@@ -36,6 +36,7 @@ function Register() {
 
   let onSubmit = (data) => {
     setError("");
+    let photofile = "";
     let formData = new FormData();
     formData.append("image", data.photo[0]);
     let url = `https://api.imgbb.com/1/upload?key=${
@@ -49,8 +50,34 @@ function Register() {
       .then((res) => res.json())
       .then((imgdata) => {
         console.log(imgdata.data.display_url);
-        setPhoto(imgdata.data.display_url) ;
-        console.log('photo',photo);
+        axios
+          .post(`https://summer-camp-server-henna.vercel.app/users`, {
+            username: data.username,
+            email: data.email,
+            photo: imgdata.data.display_url,
+          })
+          .then((data) => {
+            console.log(data.data);
+          });
+        createUserWithEmailAndPassword(auth, data.email, data.password)
+          .then(() => {
+            
+            updateProfile(auth.currentUser, {
+              displayName: data.username,
+              photoURL: imgdata.data.display_url,
+            })
+              .then(() => {
+                navigate("/");
+                console.log("photo: ", photofile);
+              })
+              .catch((error) => {
+                modifyError(error);
+              });
+          })
+          .catch((error) => {
+            console.log(error);
+            modifyError(error);
+          });
       });
     console.log(data);
     if (data.password.length < 6) {
@@ -67,32 +94,6 @@ function Register() {
       setError(`Password must have 1 Special character`);
       return;
     }
-    createUserWithEmailAndPassword(auth, data.email, data.password)
-      .then(() => {
-        console.log("photo: ", photo);
-        updateProfile(auth.currentUser, {
-          displayName: data.username,
-          photoURL: photo,
-        })
-          .then(() => {
-            axios
-              .post(`http://localhost:5000/users`, {
-                username: data.username,
-                email: data.email,
-                photo: photo,
-              })
-              .then(() => {
-                navigate("/");
-              });
-          })
-          .catch((error) => {
-            modifyError(error);
-          });
-      })
-      .catch((error) => {
-        console.log(error);
-        modifyError(error);
-      });
   };
 
   let handleGoogleSignIn = (e) => {
