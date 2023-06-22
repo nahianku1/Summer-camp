@@ -70,7 +70,7 @@ function ApprovedClasses() {
       });
   };
   console.log(role);
-  if (isLoading) {
+  if (isLoading || !role) {
     return (
       <div className="flex justify-center items-center min-h-[calc(100vh-45px)]">
         <Vortex

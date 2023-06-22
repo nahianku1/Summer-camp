@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { FaAccusoft, FaCcVisa, FaLeanpub, FaReadme } from "react-icons/fa";
 import { IoHomeSharp, IoNewspaper, IoPeopleSharp, IoReader, IoSchoolSharp } from "react-icons/io5";
+import { Vortex } from "react-loader-spinner";
 import { NavLink } from "react-router-dom";
 
 function DashboardSidebar() {
@@ -8,6 +9,23 @@ function DashboardSidebar() {
   useEffect(() => {
     setRole(JSON.parse(localStorage.getItem("token"))?.userinfo?.role);
   }, []);
+
+  if (!role) {
+    return (
+      <div className="flex justify-center items-center min-h-[calc(100vh-45px)]">
+        <Vortex
+          visible={true}
+          height="200"
+          width="200"
+          ariaLabel="vortex-loading"
+          wrapperStyle={{}}
+          wrapperClass="vortex-wrapper"
+          colors={["red", "green", "blue", "yellow", "orange", "purple"]}
+        />
+      </div>
+    );
+  }
+
   return (
     <div className="w-[18%] min-h-screen top-0 left-0 fixed bg-red-400">
       <div className="flex flex-col gap-3 mt-[20px] items-center justify-center">
