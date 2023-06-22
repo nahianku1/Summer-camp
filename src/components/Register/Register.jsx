@@ -36,50 +36,6 @@ function Register() {
 
   let onSubmit = (data) => {
     setError("");
-    let photofile = "";
-    let formData = new FormData();
-    formData.append("image", data.photo[0]);
-    let url = `https://api.imgbb.com/1/upload?key=${
-      import.meta.env.VITE_IMGBB_KEY
-    }`;
-
-    fetch(url, {
-      method: "POST",
-      body: formData,
-    })
-      .then((res) => res.json())
-      .then((imgdata) => {
-        console.log(imgdata.data.display_url);
-        axios
-          .post(`https://summer-camp-server-henna.vercel.app/users`, {
-            username: data.username,
-            email: data.email,
-            photo: imgdata.data.display_url,
-          })
-          .then((data) => {
-            console.log(data.data);
-          });
-        createUserWithEmailAndPassword(auth, data.email, data.password)
-          .then(() => {
-            
-            updateProfile(auth.currentUser, {
-              displayName: data.username,
-              photoURL: imgdata.data.display_url,
-            })
-              .then(() => {
-                navigate("/");
-                console.log("photo: ", photofile);
-              })
-              .catch((error) => {
-                modifyError(error);
-              });
-          })
-          .catch((error) => {
-            console.log(error);
-            modifyError(error);
-          });
-      });
-    console.log(data);
     if (data.password.length < 6) {
       setError(`Password should be 6 character long`);
       return;
@@ -94,6 +50,48 @@ function Register() {
       setError(`Password must have 1 Special character`);
       return;
     }
+    let photofile = "";
+    let formData = new FormData();
+    formData.append("image", data.photo[0]);
+    let url = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_IMGBB_KEY
+    }`;
+
+    fetch(url, {
+      method: "POST",
+      body: formData,
+    })
+      .then((res) => res.json())
+      .then((imgdata) => {
+        console.log(imgdata?.data?.display_url);
+        axios
+          .post(`https://summer-camp-server-henna.vercel.app/users`, {
+            username: data.username,
+            email: data.email,
+            photo: imgdata.data.display_url,
+          })
+          .then(() => {
+            createUserWithEmailAndPassword(auth, data.email, data.password)
+              .then(() => {
+                updateProfile(auth.currentUser, {
+                  displayName: data.username,
+                  photoURL: imgdata.data.display_url,
+                })
+                  .then(() => {
+                    navigate("/");
+                    console.log("photo: ", photofile);
+                  })
+                  .catch((error) => {
+                    modifyError(error);
+                  });
+              })
+              .catch((error) => {
+                console.log(error);
+                modifyError(error);
+              });
+          });
+      });
+    console.log(data);
   };
 
   let handleGoogleSignIn = (e) => {

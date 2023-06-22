@@ -24,7 +24,7 @@ function ApprovedClasses() {
       );
       return res.json();
     },
-    refetchOnMount: false,
+    
     refetchOnWindowFocus: false,
   });
 
